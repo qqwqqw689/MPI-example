@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
     {
         printf("This application is meant to be run with 4 MPI processes, not %d.\n", comm_size);
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+        // Terminates MPI execution environment.
     }
 
     // Get my rank
@@ -68,6 +69,8 @@ int main(int argc, char* argv[])
         
         // Job begins for me, check the clock
         start = MPI_Wtime();
+        // MPI_Wtime returns a floating-point number of seconds, representing elapsed
+        // wall-clock time since some time in the past.
 
         // I simulate the latency
         while(MPI_Wtime() - start < waiting_time)
