@@ -59,6 +59,19 @@ int main(int argc, char* argv[])
     int my_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
+    /*
+    MPI_Allreduce(
+    void* send_data,
+    void* recv_data,
+    int count,
+    MPI_Datatype datatype,
+    MPI_Op op,
+    MPI_Comm communicator)
+
+    send_data parameter is an array of elements of type datatype
+    recv_data array contains the reduced result and has a size of sizeof(datatype) * count
+    */
+
     // Each MPI process sends its rank to reduction, root MPI process collects the result
     int reduction_result = 0;
     MPI_Allreduce(&my_rank, &reduction_result, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
